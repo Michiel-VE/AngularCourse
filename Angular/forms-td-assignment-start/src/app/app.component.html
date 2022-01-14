@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- Add a Form with the following Inputs (and Validators)
+           1) Mail address (should not be empty and should be an email address)
+           2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
+              Set "Advanced" as Default
+           3) A Password field (should not be empty)
+           4) A Submit Button
+
+           Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
+
+           Upon submitting the form, you should simply print the Value of the Form to the Console.
+           Optionally, display it in your template.
+      -->
+      <form (ngSubmit)="Submit()" #form="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" class="form-control" name="email" email required ngModel #email="ngModel">
+          <p *ngIf="!email.valid && email.touched" class="help-block">Not a valid email!</p>
+        </div>
+        <div>
+          <label for="subs">Subscriptions</label>
+          <select id="subs" class="form-control" name="subs" [ngModel]="defaultSub">
+            <option *ngFor="let sub of subs" [value]="sub">{{sub}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input name="password" type="password" class="form-control" id="password" required ngModel
+                 #password="ngModel">
+          <p *ngIf="password.value == '' && password.touched" class="help-block">Please enter a password</p>
+        </div>
+        <div class="text-right">
+          <button [disabled]="!form.valid" type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="submitted" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <p>Email: {{formSub.email}}</p>
+      <p>Chosen Subscription: {{formSub.sub}}</p>
+      <p>Password: {{formSub.password}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default navbar-expand-md">
+  <div class="container-fluid">
+    <div class="navbar-header inline">
+      <a routerLink="/" class="navbar-brand">Recipe Book</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav" *ngIf="isAuthenticated">
+        <li routerLinkActive="active" >
+          <a routerLink="/recipes">Recipes</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/shopping-list">Shopping List</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="isAuthenticated">
+          <a (click)="onLogout()">Logout</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="!isAuthenticated">
+          <a routerLink="/auth">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
